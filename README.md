@@ -438,8 +438,25 @@ the PowerShell scripts manually.
 Install the MCP dependencies in the Python environment that will run the server:
 
 ```powershell
-cd C:\Users\YuliaFarber\Documents\dev\report\tools\dge-reconciliation
-& C:\Users\YuliaFarber\AppData\Local\Python\pythoncore-3.14-64\python.exe -m pip install -r requirements-mcp.txt
+cd C:\Users\YuliaFarber\Documents\dev\dge-report-comparator
+& C:\Users\YuliaFarber\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m venv .venv
+& .\.venv\Scripts\python.exe -m pip install -r requirements-mcp.txt
+```
+
+This repository also includes a project-scoped Codex MCP config:
+
+```text
+.codex/config.toml
+```
+
+When Codex opens this trusted project, it can start the `dge_reconciliation`
+MCP server from the local virtual environment.
+
+To verify the server imports cleanly:
+
+```powershell
+cd C:\Users\YuliaFarber\Documents\dev\dge-report-comparator
+& .\.venv\Scripts\python.exe -c "import dge_compare; import dge_mcp_server; print('ok')"
 ```
 
 Example MCP client configuration:
@@ -447,11 +464,12 @@ Example MCP client configuration:
 ```json
 {
   "mcpServers": {
-    "dge-reconciliation": {
-      "command": "C:\\Users\\YuliaFarber\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "dge_reconciliation": {
+      "command": "C:\\Users\\YuliaFarber\\Documents\\dev\\dge-report-comparator\\.venv\\Scripts\\python.exe",
       "args": [
-        "C:\\Users\\YuliaFarber\\Documents\\dev\\report\\tools\\dge-reconciliation\\dge_mcp_server.py"
-      ]
+        "C:\\Users\\YuliaFarber\\Documents\\dev\\dge-report-comparator\\dge_mcp_server.py"
+      ],
+      "cwd": "C:\\Users\\YuliaFarber\\Documents\\dev\\dge-report-comparator"
     }
   }
 }

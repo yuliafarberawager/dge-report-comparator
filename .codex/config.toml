@@ -1,0 +1,9 @@
+[mcp_servers.dge_reconciliation]
+enabled = true
+command = "C:\\Users\\YuliaFarber\\Documents\\dev\\dge-report-comparator\\.venv\\Scripts\\python.exe"
+args = ["C:\\Users\\YuliaFarber\\Documents\\dev\\dge-report-comparator\\dge_mcp_server.py"]
+cwd = "C:\\Users\\YuliaFarber\\Documents\\dev\\dge-report-comparator"
+startup_timeout_sec = 20
+tool_timeout_sec = 1800
+default_tools_approval_mode = "prompt"
+
